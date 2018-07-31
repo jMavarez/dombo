@@ -1,38 +1,42 @@
-module.exports = {
-  hasClass: hasClass,
-  addClass: addClass,
-  removeClass: removeClass,
-  toggleClass: toggleClass
-}
+module.exports = function ($) {
+  var modules = {}
 
-function hasClass (name) {
-  var res = false
-  this.forEach(function (node) {
-    if (node.className.indexOf(name) > -1) res = true
-  })
-  return res
-}
+  modules.hasClass = hasClass
+  modules.addClass = addClass
+  modules.removeClass = removeClass
+  modules.toggleClass = toggleClass
 
-function addClass (name) {
-  return this.forEach(function (node) {
-    if (node.className.indexOf(name) > -1) return
-    node.className += ' ' + name
-  })
-}
+  function hasClass(name) {
+    var res = false
+    this.forEach(function (node) {
+      if (node.className.indexOf(name) > -1) res = true
+    })
+    return res
+  }
 
-function removeClass (name) {
-  return this.forEach(function (node) {
-    if (node.className.indexOf(name) === -1) return
-    node.className = node.className.split(name).join(' ')
-  })
-}
+  function addClass(name) {
+    return this.forEach(function (node) {
+      if (node.className.indexOf(name) > -1) return
+      node.className += ' ' + name
+    })
+  }
 
-function toggleClass (name, state) {
-  return this.forEach(function (node) {
-    node = $(node)
-    if (state === true) return node.addClass(name)
-    if (state === false) return node.removeClass(name)
-    if (node.hasClass(name)) return node.removeClass(name)
-    return node.addClass(name)
-  })
+  function removeClass(name) {
+    return this.forEach(function (node) {
+      if (node.className.indexOf(name) === -1) return
+      node.className = node.className.split(name).join(' ')
+    })
+  }
+
+  function toggleClass(name, state) {
+    return this.forEach(function (node) {
+      node = $(node)
+      if (state === true) return node.addClass(name)
+      if (state === false) return node.removeClass(name)
+      if (node.hasClass(name)) return node.removeClass(name)
+      return node.addClass(name)
+    })
+  }
+
+  return modules
 }

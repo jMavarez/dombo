@@ -7,7 +7,7 @@ var ARRAY_PROPERTIES = [
   'values', 'iterator'
 ]
 
-var dombo = function  (selector, context) {
+var dombo = function (selector, context) {
   context = context || document
 
   var nodes
@@ -31,7 +31,7 @@ var dombo = function  (selector, context) {
 /*
   The next three functions are the core functionality of Dombo.
 */
-function DomboObject (nodes) {
+function DomboObject(nodes) {
   var that = this
 
   this._nodes = nodes
@@ -68,7 +68,7 @@ function DomboObject (nodes) {
 }
 DomboObject.prototype._typesChecked = {}
 
-function propertyPattern (name) {
+function propertyPattern(name) {
   return {
     get: function () {
       var res = []
@@ -85,7 +85,7 @@ function propertyPattern (name) {
     }
   }
 }
-function functionPattern (name) {
+function functionPattern(name) {
   return {
     get: function () {
       var that = this
@@ -104,7 +104,7 @@ function functionPattern (name) {
 }
 
 var plugins = [
-  require('./classes'),
+  require('./classes')(dombo),
   require('./events')
 ]
 
